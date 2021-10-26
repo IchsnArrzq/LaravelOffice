@@ -90,8 +90,9 @@
             @include('layouts.components.pegawai.script')
         @endrole
         <!-- PEGAWAI END -->
-
     @endauth
+        
+    @include('sweetalert::alert')
 </body>
 
 </html>

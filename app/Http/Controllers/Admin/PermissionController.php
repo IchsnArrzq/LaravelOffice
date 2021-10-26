@@ -3,7 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
+use Spatie\Permission\Models\Permission;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PermissionController extends Controller
 {
@@ -14,7 +20,9 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.permission.index', [
+            'permissions' => Permission::get()
+        ]);
     }
 
     /**
@@ -24,7 +32,9 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.permission.create', [
+            'permission' => new Permission()
+        ]);
     }
 
     /**
@@ -35,7 +45,25 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attr = $request->all();
+        $attr['name'] = Str::slug($request->name);
+        $validator = Validator::make($attr, [
+            'name' => ['required', 'unique:permissions']
+        ]);
+        if ($validator->fails()) {
+            Alert::warning('Warning', $validator->errors()->first());
+            throw ValidationException::withMessages([
+                'name' => $validator->errors()->first()
+            ]);
+        }
+        try {
+            Permission::create($attr);
+            Alert::success('Success', 'Success Store Permission');
+            return back();
+        } catch (Exception $exc) {
+            Alert::error('Error', $exc->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -57,7 +85,9 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.permission.edit', [
+            'permission' => Permission::find($id)
+        ]);
     }
 
     /**
@@ -80,6 +110,13 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Permission::findOrFail($id)->delete();
+            Alert::success('Success', 'Success Delete Permission');
+            return back();
+        } catch (Exception $error) {
+            Alert::error('Error', $error->getMessage());
+            return back();
+        }
     }
 }

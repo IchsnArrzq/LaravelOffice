@@ -1,6 +1,6 @@
 <!-- Loader -->
 <div id="loading">
-    <img src="../../../assets/img/loader4.svg" class="loader-img" alt="Loader">
+    <img src="{{ asset('assets/img/loader4.svg') }}" class="loader-img" alt="Loader">
 </div>
 
 <!-- main-header -->
@@ -10,8 +10,8 @@
             <!--logo-->
             <div class="main-header-left">
                 <div class="hor-logo">
-                    <a class="main-logo desktop-logo" href="index.html"><img src="../../../assets/img/brand/logo-white.png" alt="logo"></a>
-                    <a class="main-logo mobile-logo" href="index.html"><img src="../../../assets/img/brand/favicon-white.png" alt="logo"></a>
+                    <a class="main-logo desktop-logo" href="index.html"><img src="{{ asset('assets/img/brand/logo-white.png') }}" alt="logo"></a>
+                    <a class="main-logo mobile-logo" href="index.html"><img src="{{ asset('assets/img/brand/favicon-white.png') }}" alt="logo"></a>
                 </div>
                 <!-- sidebar-toggle-->
                 <div class="app-sidebar__toggle" data-toggle="sidebar">
@@ -52,43 +52,43 @@
                         </div>
                         <div class="main-notification-list">
                             <div class="media new">
-                                <div class="main-img-user"><img alt="" src="../../../assets/img/users/male/1.jpg"></div>
+                                <div class="main-img-user"><img alt="" src="{{ asset('assets/img/users/male/1.jpg') }}"></div>
                                 <div class="media-body">
                                     <p> <strong>Jack Wright</strong> Congratulatation your template awesome</p><span>Jan 15 12:32pm</span>
                                 </div>
                             </div>
                             <div class="media new">
-                                <div class="main-img-user online"><img alt="" src="../../../assets/img/users/female/12.jpg"></div>
+                                <div class="main-img-user online"><img alt="" src="{{ asset('assets/img/users/female/12.jpg') }}"></div>
                                 <div class="media-body">
                                     <p><strong>Lisa Rutherford</strong> Hey! there I'm available</p><span>Jan 13 04:16am</span>
                                 </div>
                             </div>
                             <div class="media">
-                                <div class="main-img-user"><img alt="" src="../../../assets/img/users/male/22.jpg"></div>
+                                <div class="main-img-user"><img alt="" src="{{ asset('assets/img/users/male/22.jpg') }}"></div>
                                 <div class="media-body">
                                     <p><strong>Blake Walker</strong> just created a new blog post</p><span>Dec 13 02:56am</span>
                                 </div>
                             </div>
                             <div class="media">
-                                <div class="main-img-user online"><img alt="" src="../../../assets/img/users/female/16.jpg"></div>
+                                <div class="main-img-user online"><img alt="" src="{{ asset('assets/img/users/female/16.jpg') }}"></div>
                                 <div class="media-body">
                                     <p><strong>Fiona Morrison</strong> added new comment on your photo</p><span>Dec 12 10:40pm</span>
                                 </div>
                             </div>
                             <div class="media">
-                                <div class="main-img-user"><img alt="" src="../../../assets/img/users/male/16.jpg"></div>
+                                <div class="main-img-user"><img alt="" src="{{ asset('assets/img/users/male/16.jpg') }}"></div>
                                 <div class="media-body">
                                     <p><strong>Victor Lee</strong> added new comment on your photo</p><span>Nov 27 10:40pm</span>
                                 </div>
                             </div>
                             <div class="media">
-                                <div class="main-img-user"><img alt="" src="../../../assets/img/users/male/12.jpg"></div>
+                                <div class="main-img-user"><img alt="" src="{{ asset('assets/img/users/male/12.jpg') }}"></div>
                                 <div class="media-body">
                                     <p><strong>Stewart Bond</strong> your payment invoice is generated</p><span>Nov 22 12 10:40pm</span>
                                 </div>
                             </div>
                             <div class="media">
-                                <div class="main-img-user online"><img alt="" src="../../../assets/img/users/female/11.jpg"></div>
+                                <div class="main-img-user online"><img alt="" src="{{ asset('assets/img/users/female/11.jpg') }}"></div>
                                 <div class="media-body">
                                     <p><strong>Faith Dickens</strong> please check your mail....</p><span>Nov 19 10:40pm</span>
                                 </div>
@@ -171,7 +171,7 @@
                 </div>
                 <div class="dropdown main-profile-menu">
                     <a class="main-img-user" href="">
-                        <img alt="" src="../../../assets/img/users/male/15.jpg">
+                        <img alt="" src="{{ asset('assets/img/users/male/15.jpg') }}">
                     </a>
                     <div class="dropdown-menu">
                         <div class="main-header-profile">
@@ -182,7 +182,7 @@
                         <a class="dropdown-item" href="#"><i class="si si-envelope-open"></i> Inbox</a>
                         <a class="dropdown-item" href="#"><i class="si si-calendar"></i> Activity</a>
                         <a class="dropdown-item" href="#"><i class="si si-bubbles"></i> Chat</a>
-                        <a class="dropdown-item" href="{{ route('admin.') }}"><i class="si si-settings"></i> Settings</a>
+                        <a class="dropdown-item" href="{{ route('admin.setting.index') }}"><i class="si si-settings"></i> Settings</a>
                         <a class="dropdown-item" href="#"><i class="si si-power"></i> Logo Out</a>
                     </div>
                 </div>

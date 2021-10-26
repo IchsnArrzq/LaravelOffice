@@ -100,7 +100,7 @@
                         <div class="tab-pane" id="side-2">
                             <div class="p-3 d-flex  align-items-center border-bottom">
                                 <div class="mr-2">
-                                    <div class="main-img-user"><img alt="avatar" src="../../../assets/img/users/female/2.jpg" class="mCS_img_loaded"></div>
+                                    <div class="main-img-user"><img alt="avatar" src="{{ asset('assets/img/users/female/2.jpg') }}" class="mCS_img_loaded"></div>
                                 </div>
                                 <div class="">
                                     <div class="font-weight-semibold">Sally Fraser</div>
@@ -112,7 +112,7 @@
                             </div>
                             <div class="p-3 d-flex  align-items-center border-bottom">
                                 <div class="mr-2">
-                                    <div class="main-img-user"><img alt="avatar" src="../../../assets/img/users/male/2.jpg" class="mCS_img_loaded"></div>
+                                    <div class="main-img-user"><img alt="avatar" src="{{ asset('assets/img/users/male/2.jpg') }}" class="mCS_img_loaded"></div>
                                 </div>
                                 <div class="">
                                     <div class="font-weight-semibold">Neil Baker</div>
@@ -124,7 +124,7 @@
                             </div>
                             <div class="p-3 d-flex  align-items-center border-bottom">
                                 <div class="mr-2">
-                                    <div class="main-img-user"><img alt="avatar" src="../../../assets/img/users/female/3.jpg" class="mCS_img_loaded"></div>
+                                    <div class="main-img-user"><img alt="avatar" src="{{ asset('assets/img/users/female/3.jpg') }}" class="mCS_img_loaded"></div>
                                 </div>
                                 <div class="">
                                     <div class="font-weight-semibold">Amelia Parsons</div>
@@ -136,7 +136,7 @@
                             </div>
                             <div class="p-3 d-flex  align-items-center border-bottom">
                                 <div class="mr-2">
-                                    <div class="main-img-user"><img alt="avatar" src="../../../assets/img/users/male/4.jpg" class="mCS_img_loaded"></div>
+                                    <div class="main-img-user"><img alt="avatar" src="{{ asset('assets/img/users/male/4.jpg') }}" class="mCS_img_loaded"></div>
                                 </div>
                                 <div class="">
                                     <div class="font-weight-semibold">Joseph Anderson</div>
@@ -148,7 +148,7 @@
                             </div>
                             <div class="p-3 d-flex  align-items-center border-bottom">
                                 <div class="mr-2">
-                                    <div class="main-img-user"><img alt="avatar" src="../../../assets/img/users/female/5.jpg" class="mCS_img_loaded"></div>
+                                    <div class="main-img-user"><img alt="avatar" src="{{ asset('assets/img/users/female/5.jpg') }}" class="mCS_img_loaded"></div>
                                 </div>
                                 <div class="">
                                     <div class="font-weight-semibold">Grace Payne</div>
@@ -160,7 +160,7 @@
                             </div>
                             <div class="p-3 d-flex  align-items-center border-bottom">
                                 <div class="mr-2">
-                                    <div class="main-img-user"><img alt="avatar" src="../../../assets/img/users/male/6.jpg" class="mCS_img_loaded"></div>
+                                    <div class="main-img-user"><img alt="avatar" src="{{ asset('assets/img/users/male/6.jpg') }}" class="mCS_img_loaded"></div>
                                 </div>
                                 <div class="">
                                     <div class="font-weight-semibold">Paul Glover</div>
@@ -172,7 +172,7 @@
                             </div>
                             <div class="p-3 d-flex  align-items-center border-bottom">
                                 <div class="mr-2">
-                                    <div class="main-img-user"><img alt="avatar" src="../../../assets/img/users/female/7.jpg" class="mCS_img_loaded"></div>
+                                    <div class="main-img-user"><img alt="avatar" src="{{ asset('assets/img/users/female/7.jpg') }}" class="mCS_img_loaded"></div>
                                 </div>
                                 <div class="">
                                     <div class="font-weight-semibold">Sophie Russell</div>
@@ -184,7 +184,7 @@
                             </div>
                             <div class="p-3 d-flex  align-items-center border-bottom">
                                 <div class="mr-2">
-                                    <div class="main-img-user"><img alt="avatar" src="../../../assets/img/users/male/8.jpg" class="mCS_img_loaded"></div>
+                                    <div class="main-img-user"><img alt="avatar" src="{{ asset('assets/img/users/male/8.jpg') }}" class="mCS_img_loaded"></div>
                                 </div>
                                 <div class="">
                                     <div class="font-weight-semibold">Jack Ince</div>

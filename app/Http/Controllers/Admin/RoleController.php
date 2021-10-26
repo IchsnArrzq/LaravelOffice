@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -14,7 +16,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('admin.role.index');
+        return view('admin.role.index',[
+            'roles' => Role::get()
+        ]);
     }
 
     /**
@@ -24,7 +28,10 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.role.create',[
+            'role' => new Role(),
+            'permissions' => Permission::get()
+        ]);
     }
 
     /**
@@ -57,7 +64,10 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.role.edit',[
+            'role' => Role::find($id),
+            'permissions' => Permission::get()
+        ]);
     }
 
     /**
