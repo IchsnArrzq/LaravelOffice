@@ -15,6 +15,8 @@ class CreateStatusPernikahansTable extends Migration
     {
         Schema::create('status_pernikahans', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->integer('aktifya');
             $table->timestamps();
         });
     }

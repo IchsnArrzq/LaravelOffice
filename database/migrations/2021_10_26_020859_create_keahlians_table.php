@@ -15,6 +15,8 @@ class CreateKeahliansTable extends Migration
     {
         Schema::create('keahlians', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->integer('status');
             $table->timestamps();
         });
     }

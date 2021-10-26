@@ -15,6 +15,8 @@ class CreateDokumensTable extends Migration
     {
         Schema::create('dokumens', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->integer('status');
             $table->timestamps();
         });
     }
