@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Keahlian;
+use Exception;
 use Illuminate\Http\Request;
-
+use Alert;
 class KeahlianController extends Controller
 {
     /**
@@ -27,7 +28,9 @@ class KeahlianController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.keahlian.create',[
+            'keahlian' => new Keahlian()
+        ]);
     }
 
     /**
@@ -38,7 +41,18 @@ class KeahlianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'nama' => 'required',
+            'status' => 'required'
+        ]);
+        try {
+            Keahlian::create($request->all());
+            Alert::success('Success', 'Success Store Keahlian');
+            return back();
+        } catch (Exception $err) {
+            Alert::error('Error', $err->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -60,7 +74,9 @@ class KeahlianController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.keahlian.edit',[
+            'keahlian' => Keahlian::findOrFail($id)
+        ]);
     }
 
     /**
@@ -72,7 +88,18 @@ class KeahlianController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'nama' => 'required',
+            'status' => 'required'
+        ]);
+        try {
+            Keahlian::where('id' ,$id)->update($request->except(['_token','_method']));
+            Alert::success('Success', 'Success Update Keahlian');
+            return back();
+        } catch (Exception $err) {
+            Alert::error('Error', $err->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -83,6 +110,13 @@ class KeahlianController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Keahlian::findOrFail($id)->delete();
+            Alert::success('Success' ,'Success Delete Keahlian');
+            return back();
+        } catch (Exception $err) {
+            Alert::error('Error', $err->getMessage());
+            return back();
+        }
     }
 }

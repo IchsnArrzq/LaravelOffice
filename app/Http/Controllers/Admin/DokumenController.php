@@ -74,7 +74,9 @@ class DokumenController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.dokumen.edit',[
+            'dokumen' => Dokumen::findOrFail($id)
+        ]);
     }
 
     /**
@@ -86,7 +88,18 @@ class DokumenController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'nama' => 'required',
+            'status' => 'required'
+        ]);
+        try {
+            Dokumen::where('id', $id)->update($request->except(['_token','_method']));
+            Alert::success('Success', 'Success Update Dokumen');
+            return back();
+        } catch (Exception $th) {
+            Alert::error('Error', $th->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -97,6 +110,13 @@ class DokumenController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Dokumen::findOrFail($id)->delete();
+            Alert::success('Success' ,'Success Delete Dokumen');
+            return back();
+        } catch (Exception $th) {
+            Alert::error('Error', $th->getMessage());
+            return back();
+        }
     }
 }

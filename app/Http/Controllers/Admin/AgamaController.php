@@ -76,7 +76,9 @@ class AgamaController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.agama.edit',[
+            'agama' => Agama::findOrFail($id)
+        ]);
     }
 
     /**
@@ -88,7 +90,18 @@ class AgamaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'nama' => 'required',
+            'status' => 'required'
+        ]);
+        try {
+            Agama::where('id',$id)->update($request->except(['_token','_method']));
+            Alert::success('Success', 'Success Update Agama');
+            return back();
+        } catch (Exception $th) {
+            Alert::error('Error', $th->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -99,6 +112,13 @@ class AgamaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Agama::findOrFail($id)->delete();
+            Alert::success('Success' ,'Success Delete Agama');
+            return back();
+        } catch (Exception $err) {
+            Alert::error('Error', $err->getMessage());
+            return back();
+        }
     }
 }

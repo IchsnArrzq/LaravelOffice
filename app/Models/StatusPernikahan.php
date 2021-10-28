@@ -9,5 +9,8 @@ class StatusPernikahan extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
+    public function pegawais()
+    {
+        return $this->hasMany(Pegawai::class,'status_perkawinan_id');
+    }
 }

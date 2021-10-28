@@ -19,7 +19,6 @@ class CreatePegawaisTable extends Migration
             $table->string('nama');
             $table->string('nik');
             $table->date('tanggal_lahir');
-            $table->date('tmt');
             $table->string('tempat_lahir');
             $table->text('alamat');
             $table->string('jenis_kelamin');
@@ -27,6 +26,7 @@ class CreatePegawaisTable extends Migration
             $table->string('foto');
             $table->string('facebook');
             $table->string('instagram');
+            $table->date('tmt');
             $table->date('tanggal_kenaikan_berkala_terakhir');
             $table->date('tanggal_kenaikan_pangkat_terakhir');
             $table->integer('status_pns');
@@ -35,7 +35,7 @@ class CreatePegawaisTable extends Migration
             $table->foreignId('status_perkawinan_id')->constrained('status_pernikahans');
             $table->foreignId('agama_id')->constrained('agamas');
             $table->foreignId('jabatan_id')->constrained('jabatans');
-            $table->foreignId('pendidikan')->constrained('pendidikans');
+            $table->foreignId('pendidikan_id')->constrained('pendidikans');
             $table->foreignId('golongan_id')->constrained('golongans');
             $table->timestamps();
         });

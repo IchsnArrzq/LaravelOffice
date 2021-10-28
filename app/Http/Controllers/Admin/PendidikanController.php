@@ -74,7 +74,9 @@ class PendidikanController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.pendidikan.edit',[
+            'pendidikan' => Pendidikan::findOrFail($id)
+        ]);
     }
 
     /**
@@ -86,7 +88,18 @@ class PendidikanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'nama' => 'required',
+            'status' => 'required'
+        ]);
+        try {
+            Pendidikan::where('id' ,$id)->update($request->except(['_token','_method']));
+            Alert::success('Success', 'Success Update Pendidikan');
+            return back();
+        } catch (Exception $err) {
+            Alert::error('Error', $err->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -97,6 +110,13 @@ class PendidikanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Pendidikan::findOrFail($id)->delete();
+            Alert::success('Success' ,'Success Delete Pendidikan');
+            return back();
+        } catch (Exception $err) {
+            Alert::error('Error', $err->getMessage());
+            return back();
+        }
     }
 }

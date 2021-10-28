@@ -52,6 +52,7 @@
     @endauth
 
     <div id="app">
+        @auth
         <!--Main Content-->
         <div class="main-content px-0 app-content">
             <!--Main Content Container-->
@@ -64,6 +65,12 @@
             <!--Main Content Container-->
         </div>
         <!--Main Content-->
+        @endauth
+        @guest
+            <div class="container">
+                @yield('content')
+            </div>
+        @endguest
     </div>
     <!-- FOOTER -->
     @auth  

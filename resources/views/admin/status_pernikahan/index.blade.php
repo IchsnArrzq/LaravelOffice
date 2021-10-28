@@ -20,6 +20,7 @@
                                 <th>No.</th>
                                 <th>Nama</th>
                                 <th>Aktifya</th>
+                                <th>Total</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -29,6 +30,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $data->nama }}</td>
                                 <td>{{ $data->aktifya }}</td>
+                                <td>{{ $data->pegawais->count() }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{ route('admin.status_pernikahan.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>

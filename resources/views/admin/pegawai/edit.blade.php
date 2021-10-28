@@ -13,7 +13,7 @@
                 <a href="{{ route('admin.pegawai.index') }} " class="btn btn-sm btn-info">Back</a>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.pegawai.update', $pegawai->id) }}" method="post" id="form">
+                <form action="{{ route('admin.pegawai.update', $pegawai->id) }}" method="post" id="form" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     @include('admin.pegawai.form')

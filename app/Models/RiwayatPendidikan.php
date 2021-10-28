@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Golongan extends Model
+class RiwayatPendidikan extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    public function pegawais()
+    public function pendidikan()
     {
-        return $this->hasMany(Pegawai::class);
+        return $this->belongsTo(Pendidikan::class);
     }
+    
+
 }

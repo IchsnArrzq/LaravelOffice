@@ -24,16 +24,6 @@
                                 <th>tanggal_lahir</th>
                                 <th>tmt</th>
                                 <th>tempat_lahir</th>
-                                <th>alamat</th>
-                                <th>jenis_kelamin</th>
-                                <th>no_hp</th>
-                                <th>foto</th>
-                                <th>facebook</th>
-                                <th>instagram</th>
-                                <th>tanggal_kenaikan_berkala_terakhir</th>
-                                <th>tanggal_kenaikan_pangkat_terakhir</th>
-                                <th>status_pns</th>
-                                <th>status_user</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -41,22 +31,12 @@
                             @foreach($pegawais as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $data->nip }}</td>
+                                <td><a href="{{ route('admin.pegawai.show', $data->id) }}">{{ $data->nip }}</a></td>
                                 <td>{{ $data->nama }}</td>
                                 <td>{{ $data->nik }}</td>
                                 <td>{{ $data->tanggal_lahir }}</td>
                                 <td>{{ $data->tmt }}</td>
                                 <td>{{ $data->tempat_lahir }}</td>
-                                <td>{{ $data->alamat }}</td>
-                                <td>{{ $data->jenis_kelamin }}</td>
-                                <td>{{ $data->no_hp }}</td>
-                                <td>{{ $data->foto }}</td>
-                                <td>{{ $data->facebook }}</td>
-                                <td>{{ $data->instagram }}</td>
-                                <td>{{ $data->tanggal_kenaikan_berkala_terakhir }}</td>
-                                <td>{{ $data->tanggal_kenaikan_pangkat_terakhir }}</td>
-                                <td>{{ $data->status_pns }}</td>
-                                <td>{{ $data->status_user }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{ route('admin.pegawai.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>

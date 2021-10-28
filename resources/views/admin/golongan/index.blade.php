@@ -22,6 +22,7 @@
                                 <th>Pangkat</th>
                                 <th>Ruang</th>
                                 <th>Aktifya</th>
+                                <th>Total</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -29,10 +30,11 @@
                             @foreach($golongans as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $data->name }}</td>
+                                <td>{{ $data->nama }}</td>
                                 <td>{{ $data->pangkat }}</td>
                                 <td>{{ $data->ruang }}</td>
                                 <td>{{ $data->aktifya }}</td>
+                                <td>{{ $data->pegawais->count() }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{ route('admin.golongan.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>

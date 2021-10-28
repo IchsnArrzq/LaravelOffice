@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Golongan;
 use Illuminate\Http\Request;
+use Alert;
+use Exception;
 
 class GolonganController extends Controller
 {
@@ -15,7 +17,7 @@ class GolonganController extends Controller
      */
     public function index()
     {
-        return view('admin.golongan.index',[
+        return view('admin.golongan.index', [
             'golongans' => Golongan::get()
         ]);
     }
@@ -27,7 +29,7 @@ class GolonganController extends Controller
      */
     public function create()
     {
-        return view('admin.golongan.create',[
+        return view('admin.golongan.create', [
             'golongan' => new Golongan()
         ]);
     }
@@ -40,13 +42,15 @@ class GolonganController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'nama' => 'required',
-            'status' => 'required'
+        $this->validate($request, [
+            "nama" => "required",
+            "pangkat" => "required",
+            "ruang" => "required",
+            "aktifya" => "required"
         ]);
         try {
-            Agama::create($request->all());
-            Alert::success('Success', 'Success Store Agama');
+            Golongan::create($request->all());
+            Alert::success('Success', 'Success Store Golongan');
             return back();
         } catch (Exception $err) {
             Alert::error('Error', $err->getMessage());
@@ -73,7 +77,9 @@ class GolonganController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.golongan.edit', [
+            'golongan' => Golongan::findOrFail($id)
+        ]);
     }
 
     /**
@@ -85,7 +91,20 @@ class GolonganController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            "nama" => "required",
+            "pangkat" => "required",
+            "ruang" => "required",
+            "aktifya" => "required"
+        ]);
+        try {
+            Golongan::where('id',$id)->update($request->except(['_token','_method']));
+            Alert::success('Success' ,'Success Update Golongan');
+            return back(); 
+        } catch (Exception $th) {
+            Alert::error('Error', $th->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -96,6 +115,14 @@ class GolonganController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        try {
+            Golongan::findOrFail($id)->delete();
+            Alert::success('Success' ,'Success Delete Golongan');
+            return back(); 
+        } catch (Exception $th) {
+            Alert::error('Error', $th->getMessage());
+            return back();
+        }
     }
 }

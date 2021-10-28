@@ -7,6 +7,8 @@ use App\Models\Jabatan;
 use Exception;
 use Illuminate\Http\Request;
 use Alert;
+use App\Models\Pegawai;
+
 class JabatanController extends Controller
 {
     /**
@@ -17,7 +19,7 @@ class JabatanController extends Controller
     public function index()
     {
         return view('admin.jabatan.index',[
-            'jabatans' => Jabatan::get()
+            'jabatans' => Jabatan::get(),
         ]);
     }
 
@@ -74,7 +76,9 @@ class JabatanController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.jabatan.edit',[
+            'jabatan' => Jabatan::findOrFail($id)
+        ]);
     }
 
     /**
@@ -86,7 +90,18 @@ class JabatanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'nama' => 'required',
+            'status' => 'required'
+        ]);
+        try {
+            Jabatan::where('id' ,$id)->update($request->except(['_token','_method']));
+            Alert::success('Success', 'Success Update Jabatan');
+            return back();
+        } catch (Exception $err) {
+            Alert::error('Error', $err->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -97,6 +112,13 @@ class JabatanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Jabatan::findOrFail($id)->delete();
+            Alert::success('Success' ,'Success Delete Jabatan');
+            return back();
+        } catch (Exception $err) {
+            Alert::error('Error', $err->getMessage());
+            return back();
+        }
     }
 }

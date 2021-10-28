@@ -74,7 +74,9 @@ class StatusPernikahanController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.status_pernikahan.edit',[
+            'status_pernikahan' => StatusPernikahan::findOrFail($id)
+        ]);
     }
 
     /**
@@ -86,7 +88,18 @@ class StatusPernikahanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'nama' => 'required',
+            'aktifya' => 'required'
+        ]);
+        try {
+            StatusPernikahan::where('id' ,$id)->update($request->except(['_token','_method']));
+            Alert::success('Success' , 'Success Update Status Pernikahan');
+            return back();
+        } catch (Exception $th) {
+            Alert::error('Error', $th->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -97,6 +110,13 @@ class StatusPernikahanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            StatusPernikahan::findOrFail($id)->delete();
+            Alert::success('Success', 'Success Delete Status Pernikahan');
+            return back();            
+        } catch (Exception $th) {
+            Alert::error('Error', $th->getMessage());
+            return back();
+        }
     }
 }
