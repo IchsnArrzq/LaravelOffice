@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Status Pernikahan Create')
+@section('title', 'User Create')
 @push('bread')
-<li class="breadcrumb-item"><a href="{{ route('admin.status_pernikahan.index') }}">Status Pernikahan</a></li>
+<li class="breadcrumb-item"><a href="{{ route('admin.user.index') }}">User</a></li>
 <li class="breadcrumb-item active">Create</li>
 @endpush
 @section('content')
@@ -9,12 +9,12 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header d-flex flex-row justify-content-between">
-                <a href="{{ route('admin.status_pernikahan.index') }} " class="btn btn-sm btn-info">Back</a>
+                <a href="{{ route('admin.user.index') }} " class="btn btn-sm btn-info">Back</a>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.status_pernikahan.store') }}" method="post" id="form">
+                <form action="{{ route('admin.user.store') }}" method="post" id="form">
                     @csrf
-                    @include('admin.status_pernikahan.form')
+                    @include('admin.user.form')
                 </form>
             </div>
             <div class="card-footer d-flex flex-row justify-content-end">

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Agama Create')
 @push('bread')
-<li class="breadcrumb-item"><a href="{{ route('admin.setting.index') }}">Setting</a></li>
 <li class="breadcrumb-item"><a href="{{ route('admin.agama.index') }}">Agama</a></li>
 <li class="breadcrumb-item active">Create</li>
 @endpush

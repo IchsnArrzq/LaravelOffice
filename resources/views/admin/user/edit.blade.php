@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Pendidikan Edit')
+@section('title', 'User Edit')
 @push('bread')
-<li class="breadcrumb-item"><a href="{{ route('admin.pendidikan.index') }}">Pendidikan</a></li>
+<li class="breadcrumb-item"><a href="{{ route('admin.user.index') }}">User</a></li>
 <li class="breadcrumb-item active">Edit</li>
 @endpush
 @section('content')
@@ -9,13 +9,13 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header d-flex flex-row justify-content-between">
-                <a href="{{ route('admin.pendidikan.index') }} " class="btn btn-sm btn-info">Back</a>
+                <a href="{{ route('admin.user.index') }} " class="btn btn-sm btn-info">Back</a>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.pendidikan.update', $pendidikan->id) }}" method="post" id="form">
+                <form action="{{ route('admin.user.update', $user->id) }}" method="post" id="form">
                     @csrf
                     @method('put')
-                    @include('admin.pendidikan.form')
+                    @include('admin.user.form')
                 </form>
             </div>
             <div class="card-footer d-flex flex-row justify-content-end">

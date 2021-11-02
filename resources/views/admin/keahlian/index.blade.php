@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Keahlian List')
 @push('bread')
-<li class="breadcrumb-item"><a href="{{ route('admin.setting.index') }}">Setting</a></li>
 <li class="breadcrumb-item active">Keahlian</li>
 @endpush
 @section('content')

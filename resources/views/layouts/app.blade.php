@@ -10,31 +10,33 @@
 
     <title>@yield('title') | {{ config('app.name', 'Laravel') }}</title>
     @auth
-        <!-- ADMIN START -->
+    <!-- ADMIN START -->
         @role('admin')
             @include('layouts.components.admin.head')
         @endrole
         <!-- ADMIN END -->
 
         <!-- ==================================== -->
-        
+
         <!-- PEGAWAI START -->
         @role('pegawai')
             @include('layouts.components.pegawai.head')
         @endrole
-        <!-- PEGAWAI END -->
+    <!-- PEGAWAI END -->
     @endauth
     <!-- ==================================== -->
     @guest
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+    @include('layouts.components.admin.head')
 
-        <!-- Fonts -->
-        <link rel="dns-prefetch" href="//fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
-        <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @endguest
 </head>
 
@@ -58,8 +60,8 @@
             <!--Main Content Container-->
             <div class="container-fluid pd-t-60">
                 <!--Page Header-->
-				@include('layouts.bread')
-				<!--Page Header-->
+                @include('layouts.bread')
+                <!--Page Header-->
                 @yield('content')
             </div>
             <!--Main Content Container-->
@@ -67,13 +69,15 @@
         <!--Main Content-->
         @endauth
         @guest
-            <div class="container">
-                @yield('content')
-            </div>
+        <!-- Loader -->
+        <div id="loading">
+            <img src="{{ asset('assets/img/loader4.svg') }}" class="loader-img" alt="Loader">
+        </div>
+        @yield('content')
         @endguest
     </div>
     <!-- FOOTER -->
-    @auth  
+    @auth
         @role('admin')
             @include('layouts.components.admin.sidebar')
             @include('layouts.components.admin.footer')
@@ -83,23 +87,27 @@
             @include('layouts.components.pegawai.footer')
         @endrole
     @endauth
+
     @auth
         <!-- ADMIN START -->
         @role('admin')
             @include('layouts.components.admin.script')
         @endrole
-        <!-- ADMIN END -->
+    <!-- ADMIN END -->
 
-        <!-- ==================================== -->
+    <!-- ==================================== -->
 
-        <!-- PEGAWAI START -->
+    <!-- PEGAWAI START -->
         @role('pegawai')
             @include('layouts.components.pegawai.script')
         @endrole
-        <!-- PEGAWAI END -->
+    <!-- PEGAWAI END -->
     @endauth
-        
+
     @include('sweetalert::alert')
+    @guest
+        @include('layouts.components.admin.script')
+    @endguest
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Golongan List')
+@section('title', 'Backup List')
 @push('bread')
-<li class="breadcrumb-item active">Golongan</li>
+<li class="breadcrumb-item active">Backup</li>
 @endpush
 @section('content')
 <div class="row">
@@ -9,7 +9,14 @@
         <div class="card">
             <div class="card-header d-flex flex-row justify-content-between">
                 <a href="{{ url()->previous() }}" class="btn btn-sm btn-info">Back</a>
-                <a href="{{ route('admin.golongan.create') }}" class="btn btn-sm btn-primary">Create New</a>
+                <div class="btn-group">
+                    <a href="{{ route('admin.backup.edit', 'all') }}" class="btn btn-sm btn-primary">Restore All</a>
+                    <form action="{{ route('admin.backup.destroy', 'all') }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button class="btn btn-sm btn-danger delete_confirm" type="submit">Destroy All</button>
+                    </form>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -17,30 +24,26 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Nama</th>
-                                <th>Pangkat</th>
-                                <th>Ruang</th>
-                                <th>Aktifya</th>
-                                <th>Total</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Password</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($golongans as $data)
+                            @foreach($backups as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $data->nama }}</td>
-                                <td>{{ $data->pangkat }}</td>
-                                <td>{{ $data->ruang }}</td>
-                                <td>{{ $data->aktifya }}</td>
-                                <td>{{ $data->pegawais->count() }}</td>
+                                <td>{{ $data->name }}</td>
+                                <td>{{ $data->email }}</td>
+                                <td><span class="badge badge-warning">secrect</span></td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('admin.golongan.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                        <form action="{{ route('admin.golongan.destroy', $data->id) }}" method="post">
+                                        <a href="{{ route('admin.backup.edit', $data->id) }}" class="btn btn-sm btn-info">Restore</a>
+                                        <form action="{{ route('admin.backup.destroy', $data->id) }}" method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-sm btn-danger delete_confirm" type="submit">Destroy</button>
+                                            <button class="btn btn-sm btn-warning delete_confirm" type="submit">Destroy</button>
                                         </form>
                                     </div>
                                 </td>

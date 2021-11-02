@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Pegawai Create')
 @push('bread')
-<li class="breadcrumb-item"><a href="{{ route('admin.setting.index') }}">Setting</a></li>
 <li class="breadcrumb-item"><a href="{{ route('admin.pegawai.index') }}">Pegawai</a></li>
 <li class="breadcrumb-item active">Create</li>
 @endpush

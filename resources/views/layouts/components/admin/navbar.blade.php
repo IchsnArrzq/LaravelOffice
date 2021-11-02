@@ -10,8 +10,13 @@
             <!--logo-->
             <div class="main-header-left">
                 <div class="hor-logo">
+                    @if(\App\Models\Setting::first()->logo)
+                    <a class="main-logo desktop-logo" href="index.html"><img class="rounded img-thumbnail wd-100 wd-sm-50" src="{{ asset('storage/'.\App\Models\Setting::first()->logo) }}" alt="logo"></a>
+                    <a class="main-logo mobile-logo" href="index.html"><img class="rounded img-thumbnail wd-100 wd-sm-50" src="{{ asset('storage/'.\App\Models\Setting::first()->logo) }}" alt="logo"></a>
+                    @else
                     <a class="main-logo desktop-logo" href="index.html"><img src="{{ asset('assets/img/brand/logo-white.png') }}" alt="logo"></a>
                     <a class="main-logo mobile-logo" href="index.html"><img src="{{ asset('assets/img/brand/favicon-white.png') }}" alt="logo"></a>
+                    @endif
                 </div>
                 <!-- sidebar-toggle-->
                 <div class="app-sidebar__toggle" data-toggle="sidebar">
@@ -183,7 +188,10 @@
                         <a class="dropdown-item" href="#"><i class="si si-calendar"></i> Activity</a>
                         <a class="dropdown-item" href="#"><i class="si si-bubbles"></i> Chat</a>
                         <a class="dropdown-item" href="{{ route('admin.setting.index') }}"><i class="si si-settings"></i> Settings</a>
-                        <a class="dropdown-item" href="#"><i class="si si-power"></i> Logo Out</a>
+                        <a class="dropdown-item" href="#" onclick=""><i class="si si-power"></i> Logo Out</a>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                        </form>
                     </div>
                 </div>
                 <div class="main-header-sidebar-notification">
@@ -195,4 +203,7 @@
         </div>
     </div>
 </div>
+<script>
+
+</script>
 <!--/main-header-->

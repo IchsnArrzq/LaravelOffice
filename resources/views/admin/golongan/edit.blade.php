@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Golongan Edit')
 @push('bread')
-<li class="breadcrumb-item"><a href="{{ route('admin.setting.index') }}">Setting</a></li>
 <li class="breadcrumb-item"><a href="{{ route('admin.golongan.index') }}">Golongan</a></li>
 <li class="breadcrumb-item active">Edit</li>
 @endpush

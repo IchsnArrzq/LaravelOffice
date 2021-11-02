@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 use Alert;
-class RoleController extends Controller
+
+class BackUpController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('admin.role.index',[
-            'roles' => Role::get()
+        return view('admin.backup.index', [
+            'backups' => User::onlyTrashed()->get()
         ]);
     }
 
@@ -28,10 +28,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('admin.role.create',[
-            'role' => new Role(),
-            'permissions' => Permission::get()
-        ]);
+        //
     }
 
     /**
@@ -64,20 +61,21 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        // $array = [
-        //     Role::find($id)->permissions,
-        //     Permission::get()
-        // ];
-        // foreach($array as $key){
-        //     foreach($key as $value){
-        //         echo $value->name.'=='.$key.'<br>';
-        //     }
-        // }
-        // dd($array);
-        return view('admin.role.edit',[
-            'role' => Role::find($id),
-            'permissions' => Permission::get()
-        ]);
+        try {
+            if ($id == 'all') {
+                User::onlyTrashed()->restore();
+                Alert::success('success', 'Success Restore All User');
+                return back();
+            } else {
+                User::onlyTrashed()->where('id', $id)->restore();
+                Alert::success('success', 'Success Restore User');
+                return back();
+            }
+            return back();
+        } catch (\Throwable $th) {
+            Alert::error('error', $th->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -89,13 +87,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role = Role::find($id);
-        $role->update([
-            'name' => $request->name
-        ]);
-        $role->syncPermissions($request->permission);
-        Alert::success('Success', 'Success Update Role');
-        return back();
+        //
     }
 
     /**
@@ -106,6 +98,21 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            //code...
+            if ($id == 'all') {
+                User::onlyTrashed()->forceDelete();
+                Alert::success('success', 'Success Restore All User');
+                return back();
+            } else {
+                User::onlyTrashed()->where('id', $id)->forceDelete();
+                Alert::success('success', 'Success Restore User');
+                return back();
+            }
+            return back();
+        } catch (\Throwable $th) {
+            Alert::error('error', $th->getMessage());
+            return back();
+        }
     }
 }

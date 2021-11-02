@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Golongan List')
+@section('title', 'User List')
 @push('bread')
-<li class="breadcrumb-item active">Golongan</li>
+<li class="breadcrumb-item active">User</li>
 @endpush
 @section('content')
 <div class="row">
@@ -9,7 +9,7 @@
         <div class="card">
             <div class="card-header d-flex flex-row justify-content-between">
                 <a href="{{ url()->previous() }}" class="btn btn-sm btn-info">Back</a>
-                <a href="{{ route('admin.golongan.create') }}" class="btn btn-sm btn-primary">Create New</a>
+                <a href="{{ route('admin.user.create') }}" class="btn btn-sm btn-primary">Create New</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -17,27 +17,31 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Nama</th>
-                                <th>Pangkat</th>
-                                <th>Ruang</th>
-                                <th>Aktifya</th>
-                                <th>Total</th>
+                                <th>Email</th>
+                                <th>Name</th>
+                                <th>Password</th>
+                                <th>Role</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($golongans as $data)
+                            @foreach($users as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $data->nama }}</td>
-                                <td>{{ $data->pangkat }}</td>
-                                <td>{{ $data->ruang }}</td>
-                                <td>{{ $data->aktifya }}</td>
-                                <td>{{ $data->pegawais->count() }}</td>
+                                <td>{{ $data->email }}</td>
+                                <td>{{ $data->name }}</td>
+                                <td><span class="badge badge-warning">Secrect</span></td>
+                                <td>
+                                    <ul class="list-group">
+                                        @foreach($data->roles as $row)
+                                        <li class="list-group-item">{{ $row->name }}</li>
+                                        @endforeach
+                                    </ul>
+                                </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('admin.golongan.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                        <form action="{{ route('admin.golongan.destroy', $data->id) }}" method="post">
+                                        <a href="{{ route('admin.user.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                        <form action="{{ route('admin.user.destroy', $data->id) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-sm btn-danger delete_confirm" type="submit">Destroy</button>

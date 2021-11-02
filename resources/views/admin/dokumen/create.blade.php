@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Dokumen Create')
 @push('bread')
-<li class="breadcrumb-item"><a href="{{ route('admin.setting.index') }}">Setting</a></li>
 <li class="breadcrumb-item"><a href="{{ route('admin.dokumen.index') }}">Dokumen</a></li>
 <li class="breadcrumb-item active">Create</li>
 @endpush
