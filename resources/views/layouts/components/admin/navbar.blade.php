@@ -10,7 +10,7 @@
             <!--logo-->
             <div class="main-header-left">
                 <div class="hor-logo">
-                    @if(\App\Models\Setting::first()->logo)
+                    @if(\App\Models\Setting::get()->count() > 0)
                     <a class="main-logo desktop-logo" href="index.html"><img class="rounded img-thumbnail wd-100 wd-sm-50" src="{{ asset('storage/'.\App\Models\Setting::first()->logo) }}" alt="logo"></a>
                     <a class="main-logo mobile-logo" href="index.html"><img class="rounded img-thumbnail wd-100 wd-sm-50" src="{{ asset('storage/'.\App\Models\Setting::first()->logo) }}" alt="logo"></a>
                     @else

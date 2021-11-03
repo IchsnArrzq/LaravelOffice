@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Backup List')
+@section('title', 'User Backup List')
 @push('bread')
 <li class="breadcrumb-item active">Backup</li>
 @endpush
@@ -10,8 +10,8 @@
             <div class="card-header d-flex flex-row justify-content-between">
                 <a href="{{ url()->previous() }}" class="btn btn-sm btn-info">Back</a>
                 <div class="btn-group">
-                    <a href="{{ route('admin.backup.edit', 'all') }}" class="btn btn-sm btn-primary">Restore All</a>
-                    <form action="{{ route('admin.backup.destroy', 'all') }}" method="post">
+                    <a href="{{ route('admin.user_backup.edit', 'all') }}" class="btn btn-sm btn-primary">Restore All</a>
+                    <form action="{{ route('admin.user_backup.destroy', 'all') }}" method="post">
                         @csrf
                         @method('delete')
                         <button class="btn btn-sm btn-danger delete_confirm" type="submit">Destroy All</button>
@@ -31,7 +31,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($backups as $data)
+                            @foreach($user_backups as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $data->name }}</td>
@@ -39,8 +39,8 @@
                                 <td><span class="badge badge-warning">secrect</span></td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('admin.backup.edit', $data->id) }}" class="btn btn-sm btn-info">Restore</a>
-                                        <form action="{{ route('admin.backup.destroy', $data->id) }}" method="post">
+                                        <a href="{{ route('admin.user_backup.edit', $data->id) }}" class="btn btn-sm btn-info">Restore</a>
+                                        <form action="{{ route('admin.user_backup.destroy', $data->id) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-sm btn-warning delete_confirm" type="submit">Destroy</button>

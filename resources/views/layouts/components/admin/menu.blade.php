@@ -28,8 +28,8 @@
         <li class="slide">
             <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon" data-eva="briefcase-outline"></i><span class="side-menu__label">Informasi</span><i class="angle fe fe-chevron-down"></i></a>
             <ul class="slide-menu">
-                <li><a class="slide-item" href="asd">CPNS</a></li>
-                <li><a class="slide-item" href="asd">Unduh</a></li>
+                <li><a class="slide-item" href="{{ route('admin.kategori_informasi.index') }}">Kategori Informasi</a></li>
+                <li><a class="slide-item" href="{{ route('admin.informasi.index') }}">Informasi</a></li>
                 <li><a class="slide-item" href="asd">Kepegawaian</a></li>
             </ul>
         </li>
@@ -63,6 +63,7 @@
             <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon" data-eva="stop-circle-outline"></i><span class="side-menu__label">User & Backup</span><i class="angle fe fe-chevron-down"></i></a>
             <ul class="slide-menu">
                 <li><a class="slide-item" href="{{ route('admin.user.index') }}">User</a></li>
+                <li><a class="slide-item" href="{{ route('admin.user_backup.index') }}">User Backup</a></li>
                 <li><a class="slide-item" href="{{ route('admin.backup.index') }}">Backup</a></li>
             </ul>
         </li>

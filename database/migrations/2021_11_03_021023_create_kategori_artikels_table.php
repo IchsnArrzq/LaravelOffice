@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMutasisTable extends Migration
+class CreateKategoriArtikelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateMutasisTable extends Migration
      */
     public function up()
     {
-        Schema::create('mutasis', function (Blueprint $table) {
+        Schema::create('kategori_artikels', function (Blueprint $table) {
             $table->id();
-            $table->string('nomor_sk');
-            $table->date('tanggal');
-            $table->integer('jenis');
+            $table->string('deskripsi');
             $table->integer('status');
-            $table->foreignId('pegawai_id')->constrained('pegawais');
+            $table->string('inggris');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateMutasisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mutasis');
+        Schema::dropIfExists('kategori_artikels');
     }
 }

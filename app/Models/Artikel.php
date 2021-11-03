@@ -5,8 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FilePegawai extends Model
+class Artikel extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function kategori_artikel()
+    {
+        return $this->belongsTo(KategoriArtikel::class);
+    }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFilePegawaisTable extends Migration
+class CreateArtikelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,16 @@ class CreateFilePegawaisTable extends Migration
      */
     public function up()
     {
-        Schema::create('file_pegawais', function (Blueprint $table) {
+        Schema::create('artikels', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('judul');
+            $table->text('isi');
+            $table->date('tanggal');
+            $table->string('foto');
             $table->string('file');
-            $table->timestamp('date');
-            $table->foreignId('pegawai_id')->constrained('pegawais');
             $table->integer('aktifya');
+            $table->foreignId('kategori_artikel_id')->constrained('kategori_artikels');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ class CreateFilePegawaisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('file_pegawais');
+        Schema::dropIfExists('artikels');
     }
 }

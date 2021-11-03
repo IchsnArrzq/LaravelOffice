@@ -21,10 +21,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('/admin')->name('admin.')->group(function(){
     Route::prefix('/pegawai')->name('pegawai.')->group(function(){
-        Route::post('photo/{id}',[PegawaiController::class,'photo']);
-        Route::get('photo/delete/{id}',[PegawaiController::class,'photodelete']);
+        Route::post('/photo/{id}',[PegawaiController::class,'photo']);
+        Route::get('/photo/delete/{id}',[PegawaiController::class,'photodelete']);
+
         Route::get('/riwayatpendidikan/{id}',[PegawaiController::class,'riwayatpendidikanindex']);
         Route::post('/riwayatpendidikan/store/{id}', [PegawaiController::class, 'riwayatpendidikanstore']);
         Route::get('riwayatpendidikan/delete/{id}',[PegawaiController::class, 'riwayatpendidikandelete']);
+
+        Route::get('/filepegawai/{id}',[PegawaiController::class,'filepegawaiindex']);
+        Route::post('/file/{id}',[PegawaiController::class,'file']);
+        Route::get('/filepegawai/delete/{id}',[PegawaiController::class, 'filepegawaidelete']);
     });
 });

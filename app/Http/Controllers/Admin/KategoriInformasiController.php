@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\KategoriArtikel;
 use Illuminate\Http\Request;
 use Alert;
 
-class BackUpController extends Controller
+class KategoriInformasiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,9 @@ class BackUpController extends Controller
      */
     public function index()
     {
-        return view('admin.backup.index', [
-            'user_backups' => User::onlyTrashed()->get()
+        $kategori_informasis = KategoriArtikel::get();
+        return view('admin.kategori_informasi.index', [
+            'kategori_informasis' => $kategori_informasis
         ]);
     }
 
@@ -28,7 +29,9 @@ class BackUpController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.kategori_informasi.create', [
+            'kategori_informasi' => new KategoriArtikel()
+        ]);
     }
 
     /**
@@ -39,7 +42,14 @@ class BackUpController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'deskripsi' => 'required',
+            'status' => 'required',
+            'inggris' => 'required'
+        ]);
+        KategoriArtikel::create($request->except(['_token']));
+        Alert::success('Success', 'Success Create Kategori Informasi');
+        return back();
     }
 
     /**
@@ -61,21 +71,9 @@ class BackUpController extends Controller
      */
     public function edit($id)
     {
-        try {
-            if ($id == 'all') {
-                User::onlyTrashed()->restore();
-                Alert::success('success', 'Success Restore All User');
-                return back();
-            } else {
-                User::onlyTrashed()->where('id', $id)->restore();
-                Alert::success('success', 'Success Restore User');
-                return back();
-            }
-            return back();
-        } catch (\Throwable $th) {
-            Alert::error('error', $th->getMessage());
-            return back();
-        }
+        return view('admin.kategori_informasi.edit', [
+            'kategori_informasi' => KategoriArtikel::findOrFail($id)
+        ]);
     }
 
     /**
@@ -87,7 +85,14 @@ class BackUpController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'deskripsi' => 'required',
+            'status' => 'required',
+            'inggris' => 'required'
+        ]);
+        KategoriArtikel::where('id',$id)->update($request->except(['_token','_method']));
+        Alert::success('Success', 'Success Update Artikel Informasi');
+        return back();
     }
 
     /**
@@ -99,19 +104,11 @@ class BackUpController extends Controller
     public function destroy($id)
     {
         try {
-            //code...
-            if ($id == 'all') {
-                User::onlyTrashed()->forceDelete();
-                Alert::success('success', 'Success Restore All User');
-                return back();
-            } else {
-                User::onlyTrashed()->where('id', $id)->forceDelete();
-                Alert::success('success', 'Success Restore User');
-                return back();
-            }
+            KategoriArtikel::findOrFail($id)->delete();
+            Alert::success('Success', 'Success Delete Kategori Informasi');
             return back();
         } catch (\Throwable $th) {
-            Alert::error('error', $th->getMessage());
+            Alert::error('Error', $th->getMessage());
             return back();
         }
     }

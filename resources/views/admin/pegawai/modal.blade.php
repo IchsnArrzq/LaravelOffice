@@ -1,3 +1,29 @@
+<div class="modal" id="modaldemo9">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">File Pegawai</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <h6>Add File</h6>
+                <form action="/api/admin/pegawai/file" id="formfile" method="post" enctype="multipart/form-data">
+                    <input type="file" id="filepegawai" name="filepegawai" class="dropify" data-height="180" />
+                    <div class="form-group">
+                        <label for="nama_file">Nama File</label>
+                        <input type="text" class="form-control" name="nama_file" id="nama_file">
+                    </div>
+                    <div class="form-group">
+                        <label for="tanggal_file">Tanggal</label>
+                        <input type="date" class="form-control" readonly name="tanggal_file" id="tanggal_file" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-indigo" id="buttonfile" type="button">Save changes</button> <button class="btn btn-outline-light" data-dismiss="modal" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal" id="modaldemo8">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modal-content-demo">
