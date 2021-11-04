@@ -21,8 +21,8 @@
         <li class="slide">
             <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon" data-eva="grid-outline"></i><span class="side-menu__label">Kenaikan</span><i class="angle fe fe-chevron-down"></i></a>
             <ul class="slide-menu">
-                <li><a class="slide-item" href="asd">Kenaikan Pangkat</a></li>
-                <li><a class="slide-item" href="sad">Kenaikan Berkala</a></li>
+                <li><a class="slide-item" href="{{ route('admin.kenaikan_pangkat.index') }}">Kenaikan Pangkat</a></li>
+                <li><a class="slide-item" href="{{ route('admin.kenaikan_berkala.index') }}">Kenaikan Berkala</a></li>
             </ul>
         </li>
         <li class="slide">

@@ -22,7 +22,8 @@
                                 <th>nik</th>
                                 <th>tanggal_lahir</th>
                                 <th>tmt</th>
-                                <th>tempat_lahir</th>
+                                <th>Pensiun</th>
+                                <th>foto</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -35,7 +36,8 @@
                                 <td>{{ $data->nik }}</td>
                                 <td>{{ $data->tanggal_lahir }}</td>
                                 <td>{{ $data->tmt }}</td>
-                                <td>{{ $data->tempat_lahir }}</td>
+                                <td>{{ Carbon\Carbon::now()->addYear(60 - (Carbon\Carbon::now()->format('Y') - Carbon\Carbon::parse($data->tanggal_lahir)->format('Y')) )->format('Y-m-d') }}</td>
+                                <td><img src="{{ asset('storage/'.$data->foto) }}" class="main-img-user avatar-lg mg-sm-r-20 mg-b-20 mg-sm-b-0" alt=""></td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{ route('admin.pegawai.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>

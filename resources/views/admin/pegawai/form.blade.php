@@ -36,8 +36,8 @@
         <div class="form-group">
             <label for="jenis_kelamin">Jenis Kelamin</label>
             <select class="form-control @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin" placeholder="Jenis Kelamin ...">
-                <option @if($pegawai->jenis_kelamin ?? old('jenis_kelamin') == 'Laki Laki') selected @endif value="Laki Laki">Laki Laki</option>
-                <option @if($pegawai->jenis_kelamin ?? old('jenis_kelamin') == 'Prempuan') selected @endif value="Prempuan">Perempuan</option>
+                <option value="Laki Laki">Laki Laki</option>
+                <option value="Prempuan">Prempuan</option>
             </select>
             @error('jenis_kelamin')
             <div class="invalid-feedback">

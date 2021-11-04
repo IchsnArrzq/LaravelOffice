@@ -57,6 +57,9 @@
                     <tr>
                         <td class="border-top-0"><span class="font-weight-semibold">Jenis Kelamin :</span> {{ $pegawai->jenis_kelamin }}</td>
                     </tr>
+                    <tr>
+                        <td class="border-top-0"><span class="font-weight-semibold">Tanggal TMT :</span> {{ $pegawai->tmt }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
