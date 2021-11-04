@@ -3,11 +3,13 @@
 namespace App\Console\Commands;
 
 use App\Http\Controllers\CronJobController;
+use App\Mail\MailReminder;
 use App\Models\Apply;
 use App\Models\Pegawai;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Mail;
 
 class KenaikanBerkala extends Command
 {
@@ -47,6 +49,7 @@ class KenaikanBerkala extends Command
             $now = Carbon::now()->addDay(7)->format('Y-m-d');
             $pegawai = Pegawai::get();
             foreach($pegawai as $data){
+                $this->info($data->user->email);
                 if($data->applies->where('tipe',1)->count() == 0){
                     $kenaikan = Carbon::parse($data->tmt)->addYear(2)->subDay(7)->format('Y-m-d');
                     if($kenaikan == Carbon::now()->format('Y-m-d')){
@@ -60,6 +63,7 @@ class KenaikanBerkala extends Command
                             'golongan_terakhir' => 1,
                             'pegawai_id' => $data->id
                         ]);
+                        Mail::to($data->user->email)->send(new MailReminder($data, 'Berkala', Carbon::now()->addDay(7)->format('Y-m-d')));
                     }else{
                         $this->line('Cannot Create Apply From TMT : '.Carbon::now()->format('Y-m-d').' - '.$kenaikan);
                     }
@@ -77,6 +81,7 @@ class KenaikanBerkala extends Command
                             'golongan_terakhir' => 1,
                             'pegawai_id' => $data->id
                         ]);
+                        Mail::to($data->user->email)->send(new MailReminder($data, 'Berkala', Carbon::now()->addDay(7)->format('Y-m-d')));
                     }else{
                         $this->line('Cannot Create Apply From Tanggal Kenaikan : '.Carbon::now()->format('Y-m-d').' - '.$kenaikan);
                     }

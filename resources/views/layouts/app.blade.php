@@ -58,10 +58,13 @@
         <!--Main Content-->
         <div class="main-content px-0 app-content">
             <!--Main Content Container-->
-            <div class="container-fluid pd-t-60">
+            <div class="container-fluid @role('admin') pd-t-60 @endrole">
                 <!--Page Header-->
                 @include('layouts.bread')
                 <!--Page Header-->
+                @role('pegawai')
+                    @include('layouts.components.pegawai.sidebar')
+                @endrole
                 @yield('content')
             </div>
             <!--Main Content Container-->

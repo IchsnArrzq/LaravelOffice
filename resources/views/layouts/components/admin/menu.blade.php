@@ -34,14 +34,11 @@
             </ul>
         </li>
         <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon" data-eva="file-text-outline"></i><span class="side-menu__label">Form Elements</span><i class="angle fe fe-chevron-down"></i></a>
+            <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon" data-eva="file-text-outline"></i><span class="side-menu__label">Surat</span><i class="angle fe fe-chevron-down"></i></a>
             <ul class="slide-menu">
-                <li><a class="slide-item" href="form-elements.html">Form Elements</a></li>
-                <li><a class="slide-item" href="form-advanced.html">Advanced Forms</a></li>
-                <li><a class="slide-item" href="form-layouts.html">Form Layouts</a></li>
-                <li><a class="slide-item" href="form-validation.html">Form Validation</a></li>
-                <li><a class="slide-item" href="form-wizards.html">Form Wizards</a></li>
-                <li><a class="slide-item" href="form-editor.html">WYSIWYG Editor</a></li>
+                <li><a class="slide-item" href="{{ route('admin.surat_masuk.index') }}">Surat Masuk</a></li>
+                <li><a class="slide-item" href="{{ route('admin.surat_keluar.index') }}">Surat Keluar</a></li>
+                <li><a class="slide-item" href="{{ route('admin.klasifikasi.index') }}">Klasifikasi Surat</a></li>
             </ul>
         </li>
         <li class="slide">
@@ -64,7 +61,7 @@
             <ul class="slide-menu">
                 <li><a class="slide-item" href="{{ route('admin.user.index') }}">User</a></li>
                 <li><a class="slide-item" href="{{ route('admin.user_backup.index') }}">User Backup</a></li>
-                <li><a class="slide-item" href="{{ route('admin.backup.index') }}">Backup</a></li>
+                <li><a class="slide-item" href="{{ route('admin.backup.index') }}">Database Backup</a></li>
             </ul>
         </li>
         <li class="slide">

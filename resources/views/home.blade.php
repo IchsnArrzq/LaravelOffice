@@ -8,5 +8,8 @@
         @role('admin')
             @include('admin.dashboard')
         @endrole
+        @role('pegawai')
+            @include('pegawai.dashboard')
+        @endrole
     @endauth
 @endsection

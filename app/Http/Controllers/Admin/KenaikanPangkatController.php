@@ -86,7 +86,7 @@ class KenaikanPangkatController extends Controller
     public function destroy($id)
     {
         Apply::findOrFail($id)->delete();
-        Alert::success('Success','Success Delete Keahlian');
+        Alert::success('Success','Success Delete Kenaikan Pangkat');
         return back();
     }
 }

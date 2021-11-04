@@ -11,12 +11,15 @@ use App\Http\Controllers\Admin\KategoriInformasiController;
 use App\Http\Controllers\Admin\KeahlianController;
 use App\Http\Controllers\Admin\KenaikanBerkalaController;
 use App\Http\Controllers\Admin\KenaikanPangkatController;
+use App\Http\Controllers\Admin\KlasifikasiSuratController;
 use App\Http\Controllers\Admin\PegawaiController;
 use App\Http\Controllers\Admin\PendidikanController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StatusPernikahanController;
+use App\Http\Controllers\Admin\SuratKeluarController;
+use App\Http\Controllers\Admin\SuratMasukController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -64,4 +67,7 @@ Route::prefix('/admin')->middleware('auth')->name('admin.')->group(function () {
     Route::resource('informasi', InformasiController::class);
     Route::resource('kenaikan_berkala',KenaikanBerkalaController::class);
     Route::resource('kenaikan_pangkat',KenaikanPangkatController::class);
+    Route::resource('klasifikasi', KlasifikasiSuratController::class);
+    Route::resource('surat_masuk', SuratMasukController::class);
+    Route::resource('surat_keluar', SuratKeluarController::class);
 });

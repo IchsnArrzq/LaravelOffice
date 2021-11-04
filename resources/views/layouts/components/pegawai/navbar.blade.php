@@ -172,19 +172,22 @@
             </div>
             <div class="dropdown main-profile-menu">
                 <a class="main-img-user" href="">
-                    <img alt="" src="../../../assets/img/users/male/15.jpg">
+                    <img alt="" src="{{ asset('storage/'.$pegawai->foto) }}">
                 </a>
                 <div class="dropdown-menu">
                     <div class="main-header-profile">
-                        <h6>Peter Hill</h6>
-                        <span>Administrator</span>
+                        <h6>{{ $pegawai->nama }}</h6>
+                        <span>{{ $pegawai->jabatan->nama }}</span>
                     </div>
                     <a class="dropdown-item" href="#"><i class="si si-user"></i> Profile</a>
                     <a class="dropdown-item" href="#"><i class="si si-envelope-open"></i> Inbox</a>
                     <a class="dropdown-item" href="#"><i class="si si-calendar"></i> Activity</a>
                     <a class="dropdown-item" href="#"><i class="si si-bubbles"></i> Chat</a>
                     <a class="dropdown-item" href="#"><i class="si si-settings"></i> Settings</a>
-                    <a class="dropdown-item" href="#"><i class="si si-power"></i> Logo Out</a>
+                    <a class="dropdown-item" href="#"  onclick="logoutform()"><i class="si si-power"></i> Logo Out</a>
+                    <form action="{{ route('logout') }}" method="post" id="logout-form">
+                            @csrf
+                        </form>
                 </div>
             </div>
             <div class="main-header-sidebar-notification">
@@ -195,4 +198,12 @@
         </div>
     </div>
 </div>
+<script>
+    function logoutform() {
+        let yes = confirm('Are You Sure')
+        if (yes) {
+            $('#logout-form').submit()
+        }
+    }
+</script>
 <!--/main-header-->

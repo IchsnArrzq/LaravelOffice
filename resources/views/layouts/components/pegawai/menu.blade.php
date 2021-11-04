@@ -4,12 +4,12 @@
     <div class="app-sidebar__user clearfix">
         <div class="user-pro-body">
             <div class="sideuser-img">
-                <img src="../../../assets/img/users/male/15.jpg" alt="user-img" class="">
+                <img src="{{ asset('storage/'.$pegawai->foto) }}" alt="user-img" class="">
                 <span class="sidebar-icon"></span>
             </div>
             <div class="user-info">
-                <h2 class="app-sidebar__user-name">Peter Hill</h2>
-                <span class="app-sidebar__title">Administrator</span>
+                <h2 class="app-sidebar__user-name">{{ $pegawai->nama }}</h2>
+                <span class="app-sidebar__title">{{ $pegawai->jabatan->nama }}</span>
             </div>
         </div>
     </div>
@@ -21,37 +21,13 @@
             <a class="side-menu__item" href="index.html"><i class="side-menu__icon" data-eva="monitor-outline"></i><span class="side-menu__label">Dashboard</span></a>
         </li>
         <li>
-            <h3>Apps & Mail</h3>
+            <h3>Kenaikan</h3>
         </li>
-        <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon" data-eva="cube-outline"></i><span class="side-menu__label">Apps</span><i class="angle fe fe-chevron-down"></i></a>
-            <ul class="slide-menu">
-                <li><a class="slide-item" href="widgets.html">Widgets</a></li>
-                <li><a class="slide-item" href="app-chat.html">Chat</a></li>
-                <li><a class="slide-item" href="app-chat2.html">App chat</a></li>
-                <li><a class="slide-item" href="app-calendar.html">Calendar</a></li>
-                <li><a class="slide-item" href="app-contacts.html">Contacts</a></li>
-                <li><a class="slide-item" href="app-rangeslider.html">Range Slider</a></li>
-                <li><a class="slide-item" href="app-rating.html">Rating</a></li>
-                <li><a class="slide-item" href="app-gallery.html">Light Gallery</a></li>
-                <li><a class="slide-item" href="app-dragabble.html">Draggable Cards</a></li>
-                <li><a class="slide-item" href="app-image-compare.html">Image Comparision</a></li>
-                <li><a class="slide-item" href="app-cookie.html">Cookies</a></li>
-                <li><a class="slide-item" href="app-notification.html">Notifications</a></li>
-                <li><a class="slide-item" href="app-toast.html">Toast Notification</a></li>
-                <li><a class="slide-item" href="app-search.html">Search</a></li>
-                <li><a class="slide-item" href="app-sweetalerts.html">Sweet Alerts</a></li>
-                <li><a class="slide-item" href="app-treeview.html">Tree View</a></li>
-            </ul>
+        <li>
+            <a class="side-menu__item" href="#"><i class="side-menu__icon" data-eva="cube-outline"></i><span class="side-menu__label">Kenaikan Berkala</span></a>
         </li>
-        <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon" data-eva="email-outline"></i><span class="side-menu__label">Mail</span><i class="angle fe fe-chevron-down"></i></a>
-            <ul class="slide-menu">
-                <li><a class="slide-item" href="app-mail.html">Mailbox</a></li>
-                <li><a class="slide-item" href="app-mail-read.html">Mail Read</a></li>
-                <li><a class="slide-item" href="app-mail-information.html">Account Information</a></li>
-                <li><a class="slide-item" href="app-mail-settings.html">Mail Settings</a></li>
-            </ul>
+        <li>
+            <a class="side-menu__item" href="#"><i class="side-menu__icon" data-eva="email-outline"></i><span class="side-menu__label">Kenaikan Pangkat</span></a>
         </li>
         <li>
             <h3>Forms & Charts</h3>

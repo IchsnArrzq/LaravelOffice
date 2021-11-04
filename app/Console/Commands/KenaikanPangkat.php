@@ -3,10 +3,12 @@
 namespace App\Console\Commands;
 
 use App\Http\Controllers\CronJobController;
+use App\Mail\MailReminder;
 use App\Models\Apply;
 use App\Models\Pegawai;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class KenaikanPangkat extends Command
 {
@@ -59,6 +61,7 @@ class KenaikanPangkat extends Command
                             'golongan_terakhir' => 1,
                             'pegawai_id' => $data->id
                         ]);
+                        Mail::to($data->user->email)->send(new MailReminder($data, 'Pangkat', Carbon::now()->addDay(7)->format('Y-m-d')));
                     }else{
                         $this->line('Cannot Create Apply From TMT : '.$kenaikan.' - '.Carbon::now()->format('Y-m-d'));
                     }
@@ -76,6 +79,7 @@ class KenaikanPangkat extends Command
                             'golongan_terakhir' => 1,
                             'pegawai_id' => $data->id
                         ]);
+                        Mail::to($data->user->email)->send(new MailReminder($data, 'Pangkat', Carbon::now()->addDay(7)->format('Y-m-d')));
                     }else{
                         $this->line('Cannot Create Apply From Tanggal Kenaikan : '.$kenaikan.' - '.Carbon::now()->format('Y-m-d'));
                     }

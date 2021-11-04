@@ -12,6 +12,25 @@
                 <a href="{{ route('admin.backup.export') }}" class="btn btn-sm btn-info">Backup</a>
             </div>
             <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-group">
+                            @foreach($logs as $log)
+                            <li class="list-group-item @if($log->id == $last_id) active @endif">
+                                @if($log->id == $last_id)
+                                <h5>Last Back Up</h5>
+                                @endif
+                                <strong>{{ $log->user->name }} - {{ $log->title }}</strong>
+                                <p>{{ $log->description }}</p>
+                                <p>{{ Carbon\Carbon::parse($log->datetime)->format('d F Y H:i:s') }} - {{ Carbon\Carbon::parse($log->datetime)->diffForHumans() }}</p>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-center">
+                {{ $logs->links() }}
             </div>
         </div>
     </div>

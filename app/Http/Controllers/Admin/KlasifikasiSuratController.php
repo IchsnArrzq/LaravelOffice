@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Apply;
+use App\Models\Klasifikasi;
 use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
 
-class KenaikanBerkalaController extends Controller
+class KlasifikasiSuratController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +15,10 @@ class KenaikanBerkalaController extends Controller
      */
     public function index()
     {
-        $kenaikan_berkalas = Apply::where('tipe',1)->get();
-        return view('admin.kenaikan_berkala.index',[
-            'kenaikan_berkalas' => $kenaikan_berkalas
-        ]);
+        $klasifikasis = Klasifikasi::get();
+        return view('admin.klasifikasi.index',[
+            'klasifikasis' => $klasifikasis
+        ]);;
     }
 
     /**
@@ -29,7 +28,9 @@ class KenaikanBerkalaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.klasifikasi.create',[
+            'klasifikasi' => new Klasifikasi()
+        ]);
     }
 
     /**
@@ -85,8 +86,6 @@ class KenaikanBerkalaController extends Controller
      */
     public function destroy($id)
     {
-        Apply::findOrFail($id)->delete();
-        Alert::success('Success','Success Delete Kenaikan Berkala');
-        return back();
+        //
     }
 }
