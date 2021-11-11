@@ -11,7 +11,7 @@
                         <hr>
                         <p><span class="font-weight-bold">NIP </span> <br> <strong>{{ $pegawai->nip }}</strong></p>
                         <p><span class="font-weight-bold">Email </span> <br> {{ $pegawai->user->email }}</p>
-                        <a class="btn btn-primary rounded-lg mt-1" href="#">Profile</a>
+                        <a class="btn btn-primary rounded-lg mt-1" href="{{ route('pegawai.profile.show',$pegawai->id) }}">Profile</a>
                     </div>
                 </div>
             </div>

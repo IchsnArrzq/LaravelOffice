@@ -46,4 +46,6 @@
 
 <!--Flag Css -->
 <link href="{{ asset('assets/plugins/flag-icon-css/css/flag-icon.min.css') }}" rel="stylesheet">
+<!-- DataTable -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
 @stack('pegawai.head')

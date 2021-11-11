@@ -27,9 +27,9 @@
                             @foreach($klasifikasis as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>kode</td>>
-                                <td>nama</td>
-                                <td>uraian</td>
+                                <td>{{ $data->kode }}</td>>
+                                <td>{{ $data->nama }}</td>
+                                <td>{{ $data->uraian }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{ route('admin.klasifikasi.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>

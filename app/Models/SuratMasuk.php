@@ -9,5 +9,12 @@ class SuratMasuk extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
+    public function klasifikasi()
+    {
+        return $this->belongsTo(Klasifikasi::class);
+    }
+    public function disposisi()
+    {
+        return $this->hasMany(Disposisi::class);
+    }
 }

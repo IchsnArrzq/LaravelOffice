@@ -21,6 +21,7 @@ class CreateSuratKeluarsTable extends Migration
             $table->date('tanggal');
             $table->text('keterangan');
             $table->string('file');
+            $table->foreignId('klasifikasi_id')->constrained('klasifikasis');   
             $table->timestamps();
         });
     }

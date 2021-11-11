@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Klasifikasi;
+use App\Models\SuratKeluar;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SuratKeluarController extends Controller
 {
@@ -14,7 +19,10 @@ class SuratKeluarController extends Controller
      */
     public function index()
     {
-        return view
+        $surat_keluars = SuratKeluar::get();
+        return view('admin.surat_keluar.index', [
+            'surat_keluars' => $surat_keluars
+        ]);
     }
 
     /**
@@ -24,7 +32,11 @@ class SuratKeluarController extends Controller
      */
     public function create()
     {
-        //
+        $klasifikasi = Klasifikasi::get();
+        return view('admin.surat_keluar.create', [
+            'surat_keluar' => new SuratKeluar(),
+            'klasifikasi' => $klasifikasi
+        ]);
     }
 
     /**
@@ -35,7 +47,34 @@ class SuratKeluarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'tujuan' => 'required',
+            'nomor' => 'required',
+            'ringkas' => 'required',
+            'tanggal' => 'required',
+            'keterangan' => 'required',
+            'klasifikasi_id' => 'required',
+            'file' => 'required|mimes:pdf,docx,png,jpg,jpeg,svg'
+        ]);
+        try {
+            $name_file = Carbon::now()->format('YmdHis') . '_' . $request->file('file')->getClientOriginalName();
+            $path_file = $request->file('file')->storeAs('surat/keluar', $name_file);
+            SuratKeluar::create([
+                'tujuan' => $request->tujuan,
+                'nomor' => $request->nomor,
+                'ringkas' => $request->ringkas,
+                'tanggal' => $request->tanggal,
+                'keterangan' => $request->keterangan,
+                'klasifikasi_id' => $request->klasifikasi_id,
+                'file' => $path_file
+            ]);
+            Alert::success('Success', 'Success Create Surat Keluar');
+            return back();
+        } catch (\Throwable $th) {
+            Storage::delete($path_file);
+            Alert::error('Error', $th->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -46,7 +85,9 @@ class SuratKeluarController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('admin.surat_keluar.show',[
+            'surat_keluar' => SuratKeluar::findOrFail($id)
+        ]);
     }
 
     /**
@@ -57,7 +98,12 @@ class SuratKeluarController extends Controller
      */
     public function edit($id)
     {
-        //
+        $klasifikasi = Klasifikasi::get();
+        $surat_keluar = SuratKeluar::findOrFail($id);
+        return view('admin.surat_keluar.edit', [
+            'surat_keluar' => $surat_keluar,
+            'klasifikasi' => $klasifikasi
+        ]);
     }
 
     /**
@@ -69,7 +115,49 @@ class SuratKeluarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $this->validate($request, [
+            'tujuan' => 'required',
+            'nomor' => 'required',
+            'ringkas' => 'required',
+            'tanggal' => 'required',
+            'keterangan' => 'required',
+            'klasifikasi_id' => 'required',
+        ]);
+        $surat_keluar = SuratKeluar::findOrFail($id);
+        if ($request->file) {
+            $this->validate($request, [
+                'file' => 'required|mimes:pdf,docx,png,jpg,jpeg,svg'
+            ]);
+            try {
+                $name_file = Carbon::now()->format('YmdHis') . '_' . $request->file('file')->getClientOriginalName();
+                $path_file = $request->file('file')->storeAs('surat/keluar', $name_file);
+                Storage::delete($surat_keluar->file);
+                $surat_keluar->update([
+                    'file' => $path_file
+                ]);
+            } catch (\Throwable $th) {
+                Storage::delete($path_file);
+                Alert::error('Error', $th->getMessage());
+                return back();
+            }
+        }
+        try {
+            //code...
+            $surat_keluar->update([
+                'tujuan' => $request->tujuan,
+                'nomor' => $request->nomor,
+                'ringkas' => $request->ringkas,
+                'tanggal' => $request->tanggal,
+                'keterangan' => $request->keterangan,
+                'klasifikasi_id' => $request->klasifikasi_id,
+            ]);
+            Alert::success('Success', 'Success Update Surat Keluar');
+            return back();
+        } catch (\Throwable $th) {
+            Alert::error('Error' ,$th->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -80,6 +168,15 @@ class SuratKeluarController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $surat_keluar = SuratKeluar::findOrFail($id);
+            Storage::delete($surat_keluar->file);
+            $surat_keluar->delete();
+            Alert::success('Success', 'Success Delete Surat Keluar');
+            return back();
+        } catch (\Throwable $th) {
+            Alert::success('Error', $th->getMessage());
+            return back();
+        }
     }
 }

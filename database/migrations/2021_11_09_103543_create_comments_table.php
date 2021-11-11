@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDisposisiSuratsTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateDisposisiSuratsTable extends Migration
      */
     public function up()
     {
-        Schema::create('disposisi_surats', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('disposisi');
-            $table->string('isi');
-            $table->date('batas_waktu');
-            $table->text('catatan');
-            $table->enum('tipe',['Biasa','Penting','Segera','Rahasia']);
+            $table->text('comment');
+            $table->foreignId('file_pegawai_id')->constrained('file_pegawais');
+            $table->foreignId('pegawai_id')->constrained('pegawais');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateDisposisiSuratsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('disposisi_surats');
+        Schema::dropIfExists('comments');
     }
 }

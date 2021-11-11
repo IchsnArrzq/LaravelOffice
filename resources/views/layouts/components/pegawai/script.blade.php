@@ -67,6 +67,11 @@
 
 <!-- Lightslider js -->
 <script src="{{ asset('assets/plugins/lightslider/js/lightslider.min.js') }}"></script>
+<!-- DataTable -->
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+<!-- SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.10/dist/sweetalert2.all.min.js"></script>
 
 <!-- Custom js -->
 <script src="{{ asset('assets/js/custom.js') }}"></script>

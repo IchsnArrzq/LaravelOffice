@@ -42,14 +42,6 @@
             </ul>
         </li>
         <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon" data-eva="layout-outline"></i><span class="side-menu__label">Tables</span><i class="angle fe fe-chevron-down"></i></a>
-            <ul class="slide-menu">
-                <li><a class="slide-item" href="table-basic.html">Basic Tables</a></li>
-                <li><a class="slide-item" href="table-data.html">Data Tables</a></li>
-            </ul>
-        </li>
-
-        <li class="slide">
             <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon" data-eva="pin-outline"></i><span class="side-menu__label">Mutasi</span><i class="angle fe fe-chevron-down"></i></a>
             <ul class="slide-menu">
                 <li><a class="slide-item" href="map-leaflet.html">Leaflet</a></li>

@@ -38,4 +38,16 @@ class Pegawai extends Model
     {
         return $this->hasMany(Apply::class);
     }
+    public function disposisi()
+    {
+        return $this->hasMany(Disposisi::class);
+    }
+    public function response()
+    {
+        return $this->hasMany(Response::class);
+    }
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

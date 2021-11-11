@@ -3,6 +3,9 @@
 use App\Http\Controllers\Admin\AgamaController;
 use App\Http\Controllers\Admin\BackUpController;
 use App\Http\Controllers\Admin\BackUpDatabaseController;
+use App\Http\Controllers\Admin\DisposisiController;
+use App\Http\Controllers\Admin\DisposisiSuratKeluarController;
+use App\Http\Controllers\Admin\DisposisiSuratMasukController;
 use App\Http\Controllers\Admin\DokumenController;
 use App\Http\Controllers\Admin\GolonganController;
 use App\Http\Controllers\Admin\InformasiController;
@@ -21,6 +24,11 @@ use App\Http\Controllers\Admin\StatusPernikahanController;
 use App\Http\Controllers\Admin\SuratKeluarController;
 use App\Http\Controllers\Admin\SuratMasukController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Pegawai\AccessController;
+use App\Http\Controllers\Pegawai\FileController;
+use App\Http\Controllers\Pegawai\ProfileController;
+use App\Http\Controllers\Pegawai\SuratMasukController as PegawaiSuratMasukController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,4 +78,14 @@ Route::prefix('/admin')->middleware('auth')->name('admin.')->group(function () {
     Route::resource('klasifikasi', KlasifikasiSuratController::class);
     Route::resource('surat_masuk', SuratMasukController::class);
     Route::resource('surat_keluar', SuratKeluarController::class);
+    Route::get('disposisicreate/{id}',[DisposisiController::class,'createBySuratMasuk'])->name('disposisi.create.surat_masuk');
+    Route::resource('disposisi',DisposisiController::class);
+});
+
+Route::prefix('/')->middleware('auth')->name('pegawai.')->group(function(){
+    Route::resource('profile',ProfileController::class);
+    Route::resource('surat_masuk', PegawaiSuratMasukController::class);
+    Route::get('/file/delete/{id}', [FileController::class, 'delete'])->name('file.delete');
+    Route::resource('file',FileController::class);
+    Route::resource('access', AccessController::class);
 });

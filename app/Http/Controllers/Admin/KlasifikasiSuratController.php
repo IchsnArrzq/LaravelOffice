@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Klasifikasi;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KlasifikasiSuratController extends Controller
 {
@@ -16,7 +17,7 @@ class KlasifikasiSuratController extends Controller
     public function index()
     {
         $klasifikasis = Klasifikasi::get();
-        return view('admin.klasifikasi.index',[
+        return view('admin.klasifikasi.index', [
             'klasifikasis' => $klasifikasis
         ]);;
     }
@@ -28,7 +29,7 @@ class KlasifikasiSuratController extends Controller
      */
     public function create()
     {
-        return view('admin.klasifikasi.create',[
+        return view('admin.klasifikasi.create', [
             'klasifikasi' => new Klasifikasi()
         ]);
     }
@@ -41,7 +42,20 @@ class KlasifikasiSuratController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'kode' => 'required|unique:klasifikasis',
+            'nama' => 'required',
+            'uraian' => 'required'
+        ]);
+        try {
+            Klasifikasi::create($request->except(['_token']));
+            Alert::success('Success','Success Create Klasifikasi');
+            return back();
+        } catch (\Throwable $th) {
+            Alert::error('Error', $th->getMessage());
+            return back();
+        }
+
     }
 
     /**
@@ -63,7 +77,9 @@ class KlasifikasiSuratController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.klasifikasi.edit',[
+            'klasifikasi' => Klasifikasi::findOrFail($id)
+        ]);
     }
 
     /**
@@ -75,7 +91,30 @@ class KlasifikasiSuratController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $old = Klasifikasi::findOrFail($id)->kode;
+        $new = $request->kode;
+        if($old == $new)
+        {
+            $this->validate($request,[
+                'kode' => 'required',
+                'nama' => 'required',
+                'uraian' => 'required'
+            ]);
+        }else{
+            $this->validate($request,[
+                'kode' => 'required|unique:klasifikasis',
+                'nama' => 'required',
+                'uraian' => 'required'
+            ]);
+        }
+        try {
+            Klasifikasi::findOrFail($id)->update($request->except(['_token','_method']));
+            Alert::success('Success', 'Success Update Klasifikasi');
+            return back();
+        } catch (\Throwable $th) {
+            Alert::error('Error', $th->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -86,6 +125,13 @@ class KlasifikasiSuratController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Klasifikasi::findOrFail($id)->delete();
+            Alert::success('Success', 'Success Delete Klasifikasi');
+            return back();
+        } catch (\Throwable $th) {
+            Alert::error('Error', $th->getMessage());
+            return back();
+        }
     }
 }
