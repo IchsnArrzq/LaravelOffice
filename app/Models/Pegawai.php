@@ -50,4 +50,8 @@ class Pegawai extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    public function file_pegawai()
+    {
+        return $this->hasMany(FilePegawai::class);
+    }
 }

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FilePegawai;
 use App\Models\Pegawai;
+use App\Models\SuratKeluar;
+use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,11 +27,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->hasRole('admin')){
-            return view('home');
-        }else{
+        if (auth()->user()->hasRole('admin')) {
+            $surat_masuk = SuratMasuk::get()->count();
+            $surat_keluar = SuratKeluar::get()->count();
+            $pegawai = Pegawai::get()->count();
+            $dokumen = FilePegawai::get()->count();
+            return view('home', [
+                'surat_masuk' => $surat_masuk,
+                'surat_keluar' => $surat_keluar,
+                'pegawai' => $pegawai,
+                'dokumen' => $dokumen,
+            ]);
+        } else {
             $pegawai = auth()->user()->pegawai;
-            return view('home',[
+            return view('home', [
                 'pegawai' => $pegawai
             ]);
         }

@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\StatusPernikahanController;
 use App\Http\Controllers\Admin\SuratKeluarController;
 use App\Http\Controllers\Admin\SuratMasukController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\DevController;
 use App\Http\Controllers\Pegawai\AccessController;
 use App\Http\Controllers\Pegawai\FileController;
 use App\Http\Controllers\Pegawai\ProfileController;
@@ -89,3 +90,5 @@ Route::prefix('/')->middleware('auth')->name('pegawai.')->group(function(){
     Route::resource('file',FileController::class);
     Route::resource('access', AccessController::class);
 });
+
+Route::get('/get',[DevController::class,'get']);

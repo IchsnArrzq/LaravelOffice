@@ -74,7 +74,7 @@
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="datatableaccess ">
+                    <table class="table table-bordered" id="datatableaccess">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -85,20 +85,15 @@
                     </table>
                 </div>
                 <hr>
-                <form action="{{ route('pegawai.access.update', auth()->user()->pegawai->id) }}" method="post">
-                    @csrf
-                    @method('put')
+                <form id="FormAccess" method="post">
                     <input type="hidden" name="file_id" id="file_id">
                     <div class="form-group">
                         <label for="access">Acccess</label>
-                        <select name="access[]" id="access" multiple="multiple" class="form-control select2" onchange="OnSelectAccess(this)">
-                            @foreach($user as $option)
-                            <option value="{{ $option->id }}">{{ $option->name }} - {{ $option->roles()->first()->name }}</option>
-                            @endforeach
+                        <select name="access[]" id="access" multiple="multiple" class="form-control select2">
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
+                <button type="button" onclick="SubmitAccess()" class="btn btn-primary">Submit</button>
             </div>
         </div>
     </div>

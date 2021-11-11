@@ -194,21 +194,55 @@
         })
     }
 
+    function SubmitAccess() {
+        let data = $('#FormAccess').serialize()
+        $.ajax({
+            url: '/api/pegawai/file/access/store',
+            method: 'post',
+            data: data,
+            success: function(response) {
+                let id = $('#pegawai_id').val()
+                console.log(id)
+                $('#datatableaccess').DataTable().ajax.url(`/api/pegawai/file/access/index/${response.file_id}`).load()
+                $('#tablefilepegawai').DataTable().ajax.url(`/api/pegawai/file/index/${id}`)
+                console.log(response)
+            },
+            error: function(error) {
+                console.log(error)
+            }
+        })
+    }
+
     function AccessPreview(qr) {
+        console.log(qr)
         let id = $(qr).attr('data-id')
         $('#file_id').val(id)
-        $('#ThisForLoopAccess').html('')
-        $.ajax({
-            url: `/api/pegawai/file/access/${id}`,
-            success: function(response) {
-                console.log(response)
-                $.each(response, function() {
-                    $('#ThisForLoopAccess').append(`<tr>` +
-                        `<td>` + this.id + `</td>` +
-                        `<td>` + this.user.name + `</td>` +
-                        `</tr>`)
-                })
+        $(`#access`).select2({
+            placeholder: 'Select File No',
+            ajax: {
+                url: `/api/pegawai/file/access/${id}/`,
+                processResults: function(data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
             }
+        });
+        $('#datatableaccess').DataTable({
+            processing: true,
+            serverSide: true,
+            destroy: true,
+            ajax: `/api/pegawai/file/access/index/${id}`,
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'pegawai',
+                    name: 'pegawai'
+                }
+            ]
         })
     }
 
@@ -221,8 +255,7 @@
             serverSide: true,
             destroy: true,
             ajax: `/api/pegawai/file/comment/${id}`,
-            columns: [
-                {
+            columns: [{
                     name: 'foto',
                     data: 'foto'
                 },
@@ -239,11 +272,13 @@
                     data: 'timestamp'
                 }
             ],
-            order: [[ 3, "asc" ]]
+            order: [
+                [3, "asc"]
+            ]
         })
     }
 
-    function ButtonPrompt(qr) { 
+    function ButtonPrompt(qr) {
         let id = $(qr).attr('data-id')
         Swal.fire({
             title: 'Input Password to unlock this file',

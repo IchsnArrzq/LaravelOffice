@@ -55,5 +55,7 @@ Route::prefix('/pegawai')->name('pegawai.')->group(function () {
     Route::get('/file/password/{id}/{password}',[PegawaiController::class, 'FilePassword']);
     Route::post('/file/comment/store',[PegawaiController::class, 'FileCommentStore']);
     Route::get('/file/comment/{id}', [PegawaiController::class, 'FileComment']);
+    Route::get('/file/access/index/{id}',[PegawaiController::class, 'FileAccessIndex']);
     Route::get('/file/access/{id}',[PegawaiController::class, 'FileAccess']);
+    Route::post('/file/access/store', [PegawaiController::class, 'FileAccessStore']);
 });

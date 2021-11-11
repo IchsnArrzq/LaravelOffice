@@ -164,17 +164,22 @@ class PegawaiController extends Controller
             return '<img class="img-fluid" width="50" src="'.asset('storage/'.$data->pegawai->foto).'">';
         })->rawColumns(['foto'])->make(true);
     }
-    public function FileAccess($id)
+    public function FileAccess(Request $request)
     {
-        $access = Access::with('file_pegawai', 'user')->where('file_pegawai_id', $id)->g    ();
-        return response()->json($access);
+        $data = [];
+        $accesses = User::whereHas('roles',function($qr){
+            return $qr->where('name','pegawai');
+        })->where('name','like','%'.$request->q.'%')->get();
+        foreach ($accesses as $row) {
+            $data[] = ['id' => $row->id, 'text' => $row->name];
+        }
+        return response()->json($data);
     }
     public function FileIndex($id)
     {
-
         $query = FilePegawai::orderBy('created_at', 'desc')->whereHas('access', function ($qr) use ($id) {
             return $qr->where('user_id', Pegawai::find($id)->user->id);
-        })->orWhere('pegawai_id', $id)->get();
+        })->orWhere('access', 'public')->get();
 
         return datatables()->of($query)->editColumn('file_name', function ($data) {
             return $data->name;
@@ -185,7 +190,7 @@ class PegawaiController extends Controller
         })->editColumn('pegawai', function ($data) {
             return $data->pegawai->nama;
         })->editColumn('access', function ($data) {
-            return 'null';
+            return $data->access;
         })->editColumn('action', function ($data) {
             $type = $data->password != null ? '<a href="#" onclick="ButtonPrompt(this)" data-id="' . $data->id . '" class="btn btn-indigo"><i class="fa fa-lock"></i></a>' : '<a href="' . asset('storage/' . $data->file) . '" class="btn btn-indigo"><i class="fas fa-folder-open"></i></a>';
             $button = '<div class="btn-group">' . $type . '<a href="#" onclick="CommentPreview(this)" data-id="' . $data->id . '" data-target="#modaldemo2" data-toggle="modal" class="btn btn-purple"><i class="fas fa-comment-dots"></i></a><a href="#" onclick="AccessPreview(this)" data-id="' . $data->id . '" data-target="#modaldemo3" data-toggle="modal" class="btn btn-warning"><i class="fas fa-universal-access"></i></a></div>';
@@ -244,6 +249,32 @@ class PegawaiController extends Controller
             return response()->json($request->all());
         } catch (Exception $error) {
             return response()->json(['error' => $error->getMessage()], 401);
+        }
+    }
+    public function FileAccessIndex($id)
+    {
+        $query = Access::where('file_pegawai_id', $id)->get();
+        return datatables()->of($query)->editColumn('pegawai',function($qr){
+            return $qr->user->name;
+        })->addIndexColumn()->make(true);
+    }
+    public function FileAccessStore(Request $request)
+    {
+        try{
+            Access::where('file_pegawai_id', $request->file_id)->delete();
+            if($request->access){
+                foreach ($request->access as $user_id) {
+                    Access::create([
+                        'file_pegawai_id' => $request->file_id,
+                        'user_id' => $user_id
+                    ]);
+                }
+                FilePegawai::find($request->file_id)->update(['access'=>'private']);
+            }
+            FilePegawai::find($request->file_id)->update(['access'=>'public']);
+            return response()->json($request->all());
+        }catch(Exception $error){
+            return response()->json(['error'=>$error->getMessage()],500);
         }
     }
 }
