@@ -97,6 +97,7 @@ class PegawaiController extends Controller
             throw $error;
         }
         try {
+            
             $name = $request->nama_file . '_' . $request->file('file')->getClientOriginalName();
             $path = $request->file('file')->storeAs('/pegawai/file_pegawai', $name);
             FilePegawai::create([
@@ -262,6 +263,7 @@ class PegawaiController extends Controller
     {
         try{
             Access::where('file_pegawai_id', $request->file_id)->delete();
+            FilePegawai::find($request->file_id)->update(['access'=>'public']);
             if($request->access){
                 foreach ($request->access as $user_id) {
                     Access::create([
@@ -271,7 +273,6 @@ class PegawaiController extends Controller
                 }
                 FilePegawai::find($request->file_id)->update(['access'=>'private']);
             }
-            FilePegawai::find($request->file_id)->update(['access'=>'public']);
             return response()->json($request->all());
         }catch(Exception $error){
             return response()->json(['error'=>$error->getMessage()],500);

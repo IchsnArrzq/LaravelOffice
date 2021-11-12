@@ -90,5 +90,6 @@ Route::prefix('/')->middleware('auth')->name('pegawai.')->group(function(){
     Route::resource('file',FileController::class);
     Route::resource('access', AccessController::class);
 });
-
-Route::get('/get',[DevController::class,'get']);
+Route::view('image','image');
+Route::post('/encrypt',[DevController::class,'encrypt']);
+Route::get('/decrypt/{path}',[DevController::class,'decrypt']);

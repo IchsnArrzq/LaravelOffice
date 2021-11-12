@@ -202,9 +202,8 @@
             data: data,
             success: function(response) {
                 let id = $('#pegawai_id').val()
-                console.log(id)
                 $('#datatableaccess').DataTable().ajax.url(`/api/pegawai/file/access/index/${response.file_id}`).load()
-                $('#tablefilepegawai').DataTable().ajax.url(`/api/pegawai/file/index/${id}`)
+                $('#tablefilepegawai').DataTable().ajax.url(`/api/pegawai/file/index/${id}`).load()
                 console.log(response)
             },
             error: function(error) {
